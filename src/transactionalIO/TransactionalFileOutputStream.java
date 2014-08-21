@@ -2,38 +2,34 @@ package transactionalIO;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
 
-public class TransactionalFileInputStream extends InputStream implements Serializable{
-    private static final long serialVersionUID = -1535337478478140577L;
+public class TransactionalFileOutputStream extends OutputStream implements Serializable{
+    private static final long serialVersionUID = -1905489069486936058L;
     private String filename;
     private long offset;
     private RandomAccessFile file;
     private boolean migrated;
     
-    public TransactionalFileInputStream(String filename) throws FileNotFoundException {
+    public TransactionalFileOutputStream(String filename) throws FileNotFoundException {
         this.filename = filename;
         this.offset = 0L;
-        this.file = new RandomAccessFile(filename, "r");
+        this.file = new RandomAccessFile(filename, "rw");
         this.migrated = false;
     }
 
     @Override
-    public int read() throws IOException {
+    public void write(int b) throws IOException {
         if (migrated) {
-            file = new RandomAccessFile(filename, "r");
+            file = new RandomAccessFile(filename, "rw");
             migrated = false;
         }
         
         file.seek(offset);
-        int data = file.read();
-        if (data != -1) {
-            offset++;
-        }
-        
-        return data;
+        file.write(b);
+        offset++;
     }
     
     @Override
@@ -41,4 +37,5 @@ public class TransactionalFileInputStream extends InputStream implements Seriali
         migrated = true;
         super.close();
     }
+
 }
