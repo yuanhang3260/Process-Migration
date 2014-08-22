@@ -1,4 +1,7 @@
-package MigratableProcess;
+package Tests;
+
+import java.util.concurrent.TimeUnit;
+import MigratableProcess.MigratableProcess;
 
 public class Bar implements MigratableProcess {
     private int lucky;
@@ -13,7 +16,7 @@ public class Bar implements MigratableProcess {
         System.out.println("Lucky ball " + lucky);
         
     }
-
+    
     @Override
     public void suspend() {
         // TODO Auto-generated method stub
