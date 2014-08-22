@@ -39,6 +39,6 @@ public class TransactionalFileInputStream extends InputStream implements Seriali
     @Override
     public void close() throws IOException {
         migrated = true;
-        super.close();
+        file.close();
     }
 }

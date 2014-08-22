@@ -35,7 +35,7 @@ public class TransactionalFileOutputStream extends OutputStream implements Seria
     @Override
     public void close() throws IOException {
         migrated = true;
-        super.close();
+        file.close();
     }
 
 }
