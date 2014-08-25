@@ -58,7 +58,7 @@ public class Slave {
 
             if (tokens[0].equals("exit")) {
                 //TODO: close the listening thread and all other threads? */
-                break;
+                System.exit(0);
             }
             
             if (tokens.length < 2) {
