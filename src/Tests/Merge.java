@@ -37,12 +37,14 @@ public class Merge implements MigratableProcess{
         suspending = false;
         
         while (!suspending && !finished) {
+            System.out.println(a);
+            System.out.println(b);
             try {
                 if (a == -1 && b == -1) {
                     finished = true;
                     System.out.println("Thread finished");
                 } else {
-                    if (a == -1 || a >= b) {
+                    if (a == -1 || (b != -1 && a >=b)) {
                         output.write((char)b);
                         b = bInput.read();
                     } else {
@@ -50,7 +52,7 @@ public class Merge implements MigratableProcess{
                         a = aInput.read();
                     }
                     
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
