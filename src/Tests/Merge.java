@@ -40,6 +40,7 @@ public class Merge implements MigratableProcess{
             try {
                 if (aChar == -1 && bChar == -1) {
                     finished = true;
+                    System.out.println("Thread finished");
                 } else {
                     if (aChar == -1 || aChar >= bChar) {
                         output.write(bChar);
@@ -49,7 +50,7 @@ public class Merge implements MigratableProcess{
                         aChar = (char) aInput.read();
                     }
                     
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block

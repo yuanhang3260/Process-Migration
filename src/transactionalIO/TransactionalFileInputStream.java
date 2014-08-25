@@ -19,11 +19,13 @@ public class TransactionalFileInputStream extends InputStream implements Seriali
     @Override
     public int read() throws IOException {
         RandomAccessFile file = new RandomAccessFile(filename, "r");        
+        
         file.seek(offset);
         int data = file.read();
         if (data != -1) {
             offset++;
         }
+        
         file.close();
         
         return data;
