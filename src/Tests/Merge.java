@@ -6,7 +6,7 @@ import transactionalIO.TransactionalFileInputStream;
 import transactionalIO.TransactionalFileOutputStream;
 import MigratableProcess.MigratableProcess;
 
-public class MergeSort implements MigratableProcess{
+public class Merge implements MigratableProcess{
 
     private static final long serialVersionUID = -7853009719707155323L;
     private volatile boolean finished;
@@ -17,7 +17,7 @@ public class MergeSort implements MigratableProcess{
     private char aChar;
     private char bChar;
     
-    public MergeSort(String[] args) throws IOException {
+    public Merge(String[] args) throws IOException {
         if (args.length != 3) {
             System.out.println("usage: MergeSort <inputFile1> <inputFile2> <outputFile>");
             System.exit(-1);
