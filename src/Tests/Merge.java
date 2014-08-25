@@ -37,8 +37,6 @@ public class Merge implements MigratableProcess{
         suspending = false;
         
         while (!suspending && !finished) {
-            System.out.println(a);
-            System.out.println(b);
             try {
                 if (a == -1 && b == -1) {
                     finished = true;
