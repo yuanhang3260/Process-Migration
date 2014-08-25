@@ -10,28 +10,21 @@ public class TransactionalFileInputStream extends InputStream implements Seriali
     private static final long serialVersionUID = -1535337478478140577L;
     private String filename;
     private long offset;
-    private RandomAccessFile file;
-    private boolean migrated;
     
     public TransactionalFileInputStream(String filename) throws FileNotFoundException {
         this.filename = filename;
         this.offset = 0L;
-        this.file = new RandomAccessFile(filename, "r");
-        this.migrated = false;
     }
 
     @Override
     public int read() throws IOException {
-        if (migrated) {
-            file = new RandomAccessFile(filename, "r");
-            migrated = false;
-        }
-        
+        RandomAccessFile file = new RandomAccessFile(filename, "r");        
         file.seek(offset);
         int data = file.read();
         if (data != -1) {
             offset++;
         }
+        file.close();
         
         return data;
     }

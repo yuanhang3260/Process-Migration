@@ -40,9 +40,6 @@ public class MergeSort implements MigratableProcess{
             try {
                 if (aChar == -1 && bChar == -1) {
                     finished = true;
-                    aInput.close();
-                    bInput.close();
-                    output.close();
                 } else {
                     if (aChar == -1 || aChar >= bChar) {
                         output.write(bChar);
@@ -61,6 +58,14 @@ public class MergeSort implements MigratableProcess{
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
+        
+        try {
+            aInput.close();
+            bInput.close();
+            output.close();
+        } catch (IOException e) {
+            // TODO: handle exception
         }
     }
 
