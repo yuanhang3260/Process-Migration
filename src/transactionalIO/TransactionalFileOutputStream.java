@@ -31,11 +31,4 @@ public class TransactionalFileOutputStream extends OutputStream implements Seria
         file.write(b);
         offset++;
     }
-    
-    @Override
-    public void close() throws IOException {
-        migrated = true;
-        file.close();
-    }
-
 }

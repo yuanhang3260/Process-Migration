@@ -1,10 +1,11 @@
 package Tests;
 
-import java.util.concurrent.TimeUnit;
 import MigratableProcess.MigratableProcess;
 
 public class Foo implements MigratableProcess {
-    boolean suspend = false;
+
+    private static final long serialVersionUID = 6380583947994579888L;
+    private boolean suspend = false;
 
     @Override
     public void run() {

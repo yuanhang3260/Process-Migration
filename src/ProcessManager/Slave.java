@@ -5,20 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import MigratableProcess.MigratableProcess;
 
-public class Slave implements Runnable {
+public class Slave {
 
 /********************************* Fields *************************************/
 	private int listenPort = 9090;
@@ -27,23 +24,24 @@ public class Slave implements Runnable {
     private int num;
 
 /******************************** Methods *************************************/
-    /** @breif Slave Constructor */
+    /** @brief Slave Constructor */
     public Slave(String name, int listenPort) throws UnknownHostException 
     {
         this.listenPort = listenPort;
         this.name = name;
         this.processTable = new ConcurrentHashMap<Integer, MigratableProcess>();
-        num = 0;
+        this.num = 0;
     }
     
-    /** @breif usage */
+    /** @brief Usage */
     private void usage() {
         System.err.println("Usage:");
-        System.err.println("(1)run classname [arg1] [arg2] ...");
-        System.err.println("(2)migrate pid dest_IP, dest_port\n");
+        System.err.println("(1) run classname [arg1] [arg2] ...");
+        System.err.println("(2) migrate pid dest_IP, dest_port");
+        System.err.println("(3) exit");
     }
     
-    /** @breif Run the slave */
+    /** @brief Run the slave */
     public void runSlave() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String cmdLine = null;
@@ -53,7 +51,7 @@ public class Slave implements Runnable {
         listen_thread.start();
 
         while (true) {
-            System.out.printf("Slave> ");
+            System.out.print(name + "Slave> ");
             
             cmdLine = br.readLine();
             String[] tokens = cmdLine.split(" ");
@@ -64,7 +62,7 @@ public class Slave implements Runnable {
             }
             
             if (tokens.length < 2) {
-                System.err.println("At least 2 arguments are required!");
+                System.err.println("Error: Wrong number of arguments!");
                 usage();
                 continue;
             }
@@ -142,7 +140,7 @@ public class Slave implements Runnable {
     }
 
 
-    /** @breif migrate a process 
+    /** @brief migrate a process 
      *  @param pid the process ID
      *  @param dest_ip dest Node IP address
      *  @param dest_port dest Node listening port
@@ -173,11 +171,6 @@ public class Slave implements Runnable {
         }
         
         return;
-    }
-
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
     }
 
 

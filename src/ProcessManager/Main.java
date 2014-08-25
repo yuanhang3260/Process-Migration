@@ -5,8 +5,8 @@ import java.net.UnknownHostException;
 
 import ProcessManager.Slave;
 
-public class main {
-    public static void main(String[] args)  throws UnknownHostException, IOException {
+public class Main {
+    public static void main(String[] args) throws UnknownHostException, IOException {
         if (args.length != 1) {
             System.err.println("Usage: main <port>");
             return;

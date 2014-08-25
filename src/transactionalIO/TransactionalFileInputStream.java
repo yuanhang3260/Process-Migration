@@ -35,10 +35,4 @@ public class TransactionalFileInputStream extends InputStream implements Seriali
         
         return data;
     }
-    
-    @Override
-    public void close() throws IOException {
-        migrated = true;
-        file.close();
-    }
 }

@@ -1,9 +1,10 @@
 package Tests;
 
-import java.util.concurrent.TimeUnit;
 import MigratableProcess.MigratableProcess;
 
 public class Bar implements MigratableProcess {
+
+    private static final long serialVersionUID = -4061023427883449135L;
     private int lucky;
     
     public Bar(String[] hehe) {
