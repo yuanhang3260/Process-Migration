@@ -166,6 +166,7 @@ public class Slave {
             objOutput.writeObject(processToMigrate);
             objOutput.close();
             this.processTable.remove(pid);
+            System.out.println("Process is transferred");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -255,6 +256,7 @@ public class Slave {
 
                 Thread newThread = new Thread(migratedProcess);
                 newThread.start();
+                System.out.println("Recevied thread restarted");
 
                 slave.num++;
                 slave.processTable.put(slave.num, migratedProcess);
