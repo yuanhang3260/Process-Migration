@@ -14,8 +14,8 @@ public class Merge implements MigratableProcess{
     private TransactionalFileInputStream aInput;
     private TransactionalFileInputStream bInput;
     private TransactionalFileOutputStream output;
-    private char aChar;
-    private char bChar;
+    private int a;
+    private int b;
     
     public Merge(String[] args) throws IOException {
         if (args.length != 3) {
@@ -28,8 +28,8 @@ public class Merge implements MigratableProcess{
         aInput = new TransactionalFileInputStream(args[0]);
         bInput = new TransactionalFileInputStream(args[1]);
         output = new TransactionalFileOutputStream(args[2]);
-        aChar = (char) aInput.read();
-        bChar = (char) bInput.read();
+        a = aInput.read();
+        b = bInput.read();
     }
 
     @Override
@@ -38,16 +38,16 @@ public class Merge implements MigratableProcess{
         
         while (!suspending && !finished) {
             try {
-                if (aChar == -1 && bChar == -1) {
+                if (a == -1 && b == -1) {
                     finished = true;
                     System.out.println("Thread finished");
                 } else {
-                    if (aChar == -1 || aChar >= bChar) {
-                        output.write(bChar);
-                        bChar = (char) bInput.read();
+                    if (a == -1 || a >= b) {
+                        output.write((char)b);
+                        b = bInput.read();
                     } else {
-                        output.write(aChar);
-                        aChar = (char) aInput.read();
+                        output.write((char)a);
+                        a = aInput.read();
                     }
                     
                     Thread.sleep(100);
